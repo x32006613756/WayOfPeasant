@@ -15,6 +15,43 @@ money = 150; #Деньги персонажа.
 name_person = "notfing"; #Имя персонажа, если человек пропустил регистрацию.
 war = 0 #Кол-во сражений по умолчанию.
 
+def death(): #Функция смерти персонажа.
+    global level;
+    global myheal;
+    global money;
+    global mystamina;
+    global name_person;
+    global war;
+    death = random.randint(0, 1);
+    if (death == 0 or death == 1 and money <= 0):
+        clear();
+        print(colored("\t\t\tИгра закончена! Ваш персонаж мёртв.", "red"));
+        time.sleep(5);
+        level = 0;
+        myheal = 500;
+        mystamina = 150;
+        money = 150;
+        war = 0;
+        checkin();
+    elif (death == 1):
+        clear();
+        print(colored("\t\tВам крупно повезло! Ваш персонаж выжил, впредь будте крайне аккуратны.", "red"));
+        time.sleep(5);
+        shop();
+
+def stat(): #Функция статистики персонажа.
+    global level;
+    global war;
+    clear();
+    hud();
+    print("Вы провели", war, "сражений.");
+    textexit();
+    question_stat = int(input("::"));
+    if (question_stat == 0):
+        menu();
+    else:
+        print("Вы ввели что-то не то.");
+
 def checkin(): #Функция регистрации.
     global name_person;
     clear();
@@ -121,53 +158,50 @@ def arena(): #Функция Арены.
         question_arena = int(input("\n::"));
         if (question_arena == 1):
             if (myheal <= 50):
-                clear();
-                print("Вы не можете играть.");
-                time.sleep(3);
-                menu();
+                shop();
             else:
                 war = war + 1;
-                print("\t\t\tПротивник",random.choice(names_bot),"ХП:", bheal )
-                #print("My DMG :",mydmg,"My HP :",myheal,"BHP",bheal,"BDMG",bdmg);
-                print("\t\t\t[1]Атака [2]Суперудар");
+                print("\nВы", name_person , colored("\t\t\t\t[1]Атака", "red") , "\t\t  Противник",random.choice(names_bot));
+                print("ХП", myheal , colored("\t\t\t\t\t[2]Суперудар", "red") ,"\t\t\t  ХП:", bheal , "\n");
                 q_two_arena = int(input("::"));
                 if (q_two_arena == 1):
                     bheal = bheal - mydmg;
                     if (bheal <= 0):
-                        print("Вы нанесли", mydmg, "Противник,мёртв!");
+                        print("\t\t\tВы нанесли", mydmg, "Противник,мёртв!");
                     else:
-                        print("Вы нанесли", mydmg, "урона.","У противника HP :", bheal);
+                        print("\t\t\tВы нанесли", mydmg, "урона.","У противника HP :", bheal);
                     myheal = myheal - bdmg;
                     if  (myheal <= 0):
-                        print(colored("ПРЕДУПРЕЖДЕНИЕ: Противник нанёс вам критический удар, который поверг вас.", "red"))
-                        print("Отдохните и возвращайтесь в бой");
+                        print(colored("\t\t\tПРЕДУПРЕЖДЕНИЕ: Противник нанёс вам критический удар.", "red"))
+                        death();
                     else:
-                        print("Вам нанесли",bdmg ,"урона.","Ваше HP: ", myheal);
+                        print("\t\t\tВам нанесли",bdmg ,"урона.","Ваше HP: ", myheal);
                     if(mydmg >= bheal and myheal >=50):
                         money = money + present;
-                        print(colored("Победа!", "green"));
-                        print("Поздравляю вы победили!!!\nВаша награда :",present);
+                        print(colored("\t\t\tПобеда!", "green"));
+                        print("\t\t\tПоздравляю вы победили!!!\nВаша награда :",present);
                         time.sleep(4);
                     elif(mydmg >= bheal and myheal <=50):
                         money = money + (present/2);
-                        print(colored("Ничья!", "yellow"));
-                        print("Ваш противник побеждён но вы тоже повреждены.\nВы поделили награду :",present);
+                        print(colored("\t\t\tНичья!", "yellow"));
+                        print("\t\t\tВаш противник побеждён но вы тоже повреждены.\nВы поделили награду :",present);
                         time.sleep(4);
                     elif(myheal > bdmg and mydmg < bheal):
                         money = money + (present/2);
-                        print(colored("Ничья!", "yellow"));
+                        print(colored("\t\t\tНичья!", "yellow"));
                     elif(mydmg < bheal and bheal <=50 and myheal <=50):
                         money = money + (present/2);
-                        print(colored("Ничья!", "yellow"));
-                        print("Вы не одалели противника,но он оставил вас в живых.\n Награду он поделил с вами : ", present);
+                        print(colored("\t\t\tНичья!", "yellow"));
+                        print("\t\t\tВы не одалели противника,но он оставил вас в живых.\n Награду он поделил с вами : ", present);
                         time.sleep(4);
                     elif(myheal <= 0):
                         money = money + (present/5);
-                        print(colored("Поражение!", "red"))
-                        print("Тебя победили. Ты проиграл.");
+                        print(colored("\t\t\tПоражение!", "red"))
+                        print("\t\t\tТебя победили. Ты проиграл.");
                         time.sleep(4);
+                        death();
                     if(myheal <=50):
-                        print("Вам плохо выпейте лекарство");
+                        print("\t\t\tВам плохо выпейте лекарство");
                         time.sleep(3);
                         menu();
                     else:
@@ -183,8 +217,10 @@ def shop(): #Функция Магазин.
     global mystamina;
     global money;
     hud();
+    if (myheal <= 50):
+        print(colored("\t\t\tВам необходимо лечение! Пожалуйста примите зелье.", "red"));
                     #Первый каталог.
-    print("\t\t\t\tВсё необходимое можно купить у нас в магазине!");
+    print("\t\t\tВсё необходимое можно купить у нас в магазине!");
     print("[1]Зелье жизни I (+10 ХП)", colored("(20 Монет)", "yellow"));
     print("[2]Зелье жизни II (+30 ХП)", colored("(40 Монет)", "yellow"));
     print("[3]Зелье жизни III (+50 ХП)", colored("(60 Монет)", "yellow"));
@@ -247,18 +283,6 @@ def shop(): #Функция Магазин.
     elif (question_shop == 0):#
         menu();
 
-def stat():
-    global level;
-    global war;
-    clear();
-    hud();
-    print("Вы провели", war, "сражений.");
-    textexit();
-    question_stat = int(input("::"));
-    if (question_stat == 0):
-        menu();
-    else:
-        print("Вы ввели что-то не то.");
 def settings(): #Функция Настроек.
     clear();
 
