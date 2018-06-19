@@ -1,6 +1,6 @@
 """
 КРЕСТЬЯНИН
-РАЗРАБОТКИЧИКИ: NULLHUMAN, X23006613159, Александр, Татьяна.
+РАЗРАБОТКИЧИКИ: NULLHUMAN, X23006613159, Александр, PINKUNICORN.
 Дата: 11.06.2018.
 """
 import os
@@ -251,6 +251,7 @@ def cave(): #Функция пещеры
         menu();
     else:
         print("Вы ввели что-то не то.");
+
 def arena(): #Функция Арены.
     global myheal;
     global mystamina;
