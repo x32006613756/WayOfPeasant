@@ -55,7 +55,7 @@ def death(): #Функция смерти персонажа.
         germanii = 0
         vanadii = 0
         titan = 0
-        molibden = 0 
+        molibden = 0
         checkin();
     elif (death == 1):
         clear();
@@ -264,7 +264,7 @@ def cave(): #Функция пещеры
             shop();
         else:
             b = 0;
-            a = 1
+            a = random.randint(20, 60);
             while a > b:
                 print("\t\tДо прихода в пещеру осталось", a , "Сек.");
                 time.sleep(1);
@@ -282,7 +282,7 @@ def cave(): #Функция пещеры
                     time.sleep(1);
                     clear();
                     d = d - 1;
-            result = random.randint(0,1);
+            result = random.randint(10,120);
             if (result == 1):
                 if (metall_name == "литий"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
