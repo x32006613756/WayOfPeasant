@@ -48,6 +48,14 @@ def death(): #Функция смерти персонажа.
         mystamina = 150;
         money = 150;
         war = 0;
+        litii = 0
+        berilii = 0
+        galii = 0
+        indii = 0
+        germanii = 0
+        vanadii = 0
+        titan = 0
+        molibden = 0 
         checkin();
     elif (death == 1):
         clear();
