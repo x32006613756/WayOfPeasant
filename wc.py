@@ -20,7 +20,16 @@ mystamina = 150 #Мана персонажа.
 money = 150 #Деньги персонажа.
 name_person = "notfing" #Имя персонажа, если человек пропустил регистрацию.
 war = 0 #Кол-во сражений по умолчанию.
-kgmetall = 0 #Кол-во металла по умолчанию.
+
+litii = 0 #Переменная для кол-во лития по умолчанию.
+berilii = 0 #Кол-во бериллия.
+galii = 0 #Кол-во галлия.
+indii = 0 #Кол-во индия.
+germanii = 0 #Кол-во германия.
+vanadii = 0 #Кол-во ванадия.
+titan = 0 #Кол-во титана.
+molibden = 0 #Кол-во молибдена.
+
 
 def death(): #Функция смерти персонажа.
     global level;
@@ -133,8 +142,31 @@ def stat(): #Функция статистики персонажа.
         print("Вы ввели что-то не то.");
 
 def invent(): #Инвентарь.
-    clear();
+    global litii
+    global berilii
+    global galii
+    global indii
+    global germanii
+    global vanadii
+    global titan
+    global molibden
 
+    clear();
+    hud();
+    print("У вас", litii , "Кг лития.");
+    print("У вас", berilii , "Кг бериллия.");
+    print("У вас", galii, "Кг галлия");
+    print("У вас", indii, "Кг индия");
+    print("У вас", germanii, "Кг германия");
+    print("У вас", vanadii, "Кг ванадия");
+    print("У вас", titan, "Кг титана");
+    print("У вас", molibden, "Кг молибдена");
+    textexit();
+    question_invent = int(input("::"))
+    if (question_invent == 0):
+        menu();
+    else:
+        print("Вы ввели что-то не то");
 def shop(): #Функция Магазин.
     global myheal;
     global mystamina;
@@ -207,44 +239,103 @@ def shop(): #Функция Магазин.
         menu();
 
 def cave(): #Функция пещеры
-    global kgmetall;
+    global litii
+    global berilii
+    global galii
+    global indii
+    global germanii
+    global vanadii
+    global titan
+    global molibden
     clear();
     print("Спуститься в пещеру? [1]Да [2]Нет");
+    print("%sПРЕДУПРЕЖДЕНИЕ: выйти из пещеры можно будет только по истечению времени!%s" % (fg("red"), attr(0)));
     question_cave = int(input("::"));
     if (question_cave == 1):
         if (myheal <= 50):
             shop();
         else:
             b = 0;
-            a = random.randint(10,90);
+            a = 1
             while a > b:
-                print("До прихода в пещеру осталось", a , "Сек.");
+                print("\t\tДо прихода в пещеру осталось", a , "Сек.");
                 time.sleep(1);
                 clear();
                 a = a - 1;
-            print("%sВаш персонаж прибыл в пещеру!%s" % (fg("yellow"), attr(0)));
-            print("%sВаш персонаж начал добычу редкого металла%s" % (fg("red"), attr(0), random.choice(dict.metall)));
+            print("%s\t\tВаш персонаж прибыл в пещеру!%s" % (fg("yellow"), attr(0)));
+            metall_name = random.choice(dict.metall);
+            print("\t\tВаш персонаж начал добычу редкого металла" , metall_name);
             time.sleep(3);
             if (a == 0):
                 c = 0
-                d = random.randint(30, 120);
+                d = 1
                 while c < d:
-                    print("Персонаж бьёт киркой изо всех сил, Пожалуйста ожидайте", d , "Сек.");
+                    print("\t\tПерсонаж бьёт киркой изо всех сил, Пожалуйста ожидайте", d , "Сек.");
                     time.sleep(1);
                     clear();
                     d = d - 1;
             result = random.randint(0,1);
             if (result == 1):
-                print("%sУспех!%s" % (fg("green"), attr(0)));
-                metall_god = random.randint(1, 30);
-                print("Вы собрали", metall_god , "Кг.");
-                metall_god = metall_god + kgmetall;
-                time.sleep(3);
-                menu();
+                if (metall_name == "литий"):
+                    print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
+                    litii_kg = random.randint(1, 30);
+                    print("\t\tВы собрали", litii_kg , "Кг металла", metall_name);
+                    litii += litii_kg;
+                    time.sleep(3);
+                    invent();
+                elif(metall_name == "бериллий"):
+                    print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
+                    berilii_kg = random.randint(1, 30);
+                    print("\t\tВы собрали", berilii_kg , "Кг металла", metall_name);
+                    berilii += berilii_kg;
+                    time.sleep(3);
+                    invent();
+                elif(metall_name == "галиий"):
+                    print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
+                    galii_kg = random.randint(1, 30);
+                    print("\t\tВы собрали", galii_kg , "Кг металла", metall_name);
+                    galii += galii_kg;
+                    time.sleep(3);
+                    invent();
+                elif(metall_name == "индий"):
+                    print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
+                    indii_kg = random.randint(1, 30);
+                    print("\t\tВы собрали", indii_kg , "Кг металла", metall_name);
+                    indii += indii_kg;
+                    time.sleep(3);
+                    invent();
+                elif(metall_name == "германий"):
+                    print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
+                    germanii_kg = random.randint(1, 30);
+                    print("\t\tВы собрали", germanii_kg , "Кг металла", metall_name);
+                    germanii += germanii_kg;
+                    time.sleep(3);
+                    invent();
+                elif(metall_name == "ванадий"):
+                    print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
+                    vanadii_kg = random.randint(1, 30);
+                    print("\t\tВы собрали", vanadii_kg , "Кг металла", metall_name);
+                    vanadii += vanadii_kg;
+                    time.sleep(3);
+                    invent();
+                elif(metall_name == "титан"):
+                    print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
+                    titan_kg = random.randint(1, 30);
+                    print("\t\tВы собрали", titan , "Кг металла", metall_name);
+                    titan += titan_kg;
+                    time.sleep(3);
+                    invent();
+                elif(metall_name == "молибден"):
+                    print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
+                    molibden_kg = random.randint(2, 30);
+                    print("\t\tВы собрали", molibden_kg , "Кг металла", metall_name);
+                    molibden += molibden_kg;
+                    time.sleep(3);
+                    invent();
             elif (result == 0):
-                print("%sНеудача!\nВаш персонаж ничего не собрал%s" % (fg("red"), attr(0)));
+                print("\t\t%sНеудача!\n\t\tВаш персонаж ничего не собрал%s" % (fg("red"), attr(0)));
                 time.sleep(3);
-                menu();
+                invent();
     elif (question_cave == 0):
         menu();
     else:
