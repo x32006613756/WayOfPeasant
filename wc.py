@@ -276,13 +276,13 @@ def cave(): #Функция пещеры
             time.sleep(3);
             if (a == 0):
                 c = 0
-                d = 1
+                d = random.randint(20, 70);
                 while c < d:
                     print("\t\tПерсонаж бьёт киркой изо всех сил, Пожалуйста ожидайте", d , "Сек.");
                     time.sleep(1);
                     clear();
                     d = d - 1;
-            result = random.randint(10,120);
+            result = random.randint(0,1);
             if (result == 1):
                 if (metall_name == "литий"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
