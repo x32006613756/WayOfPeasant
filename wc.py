@@ -112,7 +112,7 @@ def settings(): #Функция Настроек.
         print("Ваше новое имя выглядит вот так :", name_person);
         time.sleep(3);
         menu();
-    if(vod == 7777):
+    elif(vod == 7777):
         global myheal;
         global money;
         global mystamina;
@@ -175,6 +175,7 @@ def invent(): #Инвентарь.
         menu();
     else:
         print("Вы ввели что-то не то");
+
 def shop(): #Функция Магазин.
     global myheal;
     global mystamina;
@@ -184,11 +185,11 @@ def shop(): #Функция Магазин.
         print("%s\t\t\tВам необходимо лечение! Пожалуйста примите зелье.%s" % (fg("red"), attr(0)));
                     #Первый каталог.
     print("\t\t\tВсё необходимое можно купить у нас в магазине!");
-    print("[1]Зелье жизни I (+10 ХП)", "%s(20 Монет)%s" % (fg("yellow"), attr(0)));
-    print("[2]Зелье жизни II (+30 ХП)", "%s(40 Монет)%s" % (fg("yellow"), attr(0)));
-    print("[3]Зелье жизни III (+50 ХП)", "%s(60 Монет)%s" % (fg("yellow"), attr(0)));
-    print("[4]Зелье жизни IV (+70 ХП)", "%s(80 Монет)%s" % (fg("yellow"), attr(0)));
-    print("[5]Зелье жизни V(+90 ХП)", "%s(120 Монет)%s" % (fg("yellow"), attr(0)));
+    print("[1]Зелье жизни I (+10 ХП)", "%s(20 Монет)%s" % (fg("yellow"), attr(0)), "[6]Зелье силы I (+10 Маны)", "%s(25 Монет)%s" % (fg("green"),attr(0)));
+    print("[2]Зелье жизни II (+30 ХП)", "%s(40 Монет)%s" % (fg("yellow"), attr(0)), "[7]Зелье силы II (+25 Маны)", "%s(40 Монет)%s" % (fg("green"),attr(0)));
+    print("[3]Зелье жизни III (+50 ХП)", "%s(60 Монет)%s" % (fg("yellow"), attr(0)), "[8]Зелье силы III (+35 Маны)", "%s(50 Монет)%s" % (fg("green"),attr(0)));
+    print("[4]Зелье жизни IV (+70 ХП)", "%s(80 Монет)%s" % (fg("yellow"), attr(0)), "[9]Зелье силы IV (+40 Маны)", "%s(65 Монет)%s" % (fg("green"),attr(0)));
+    print("[5]Зелье жизни V(+90 ХП)", "%s(120 Монет)%s" % (fg("yellow"), attr(0)), "[10]Зелье силы V (+60 Маны)", "%s(80 Монет)%s" % (fg("green"),attr(0)));
 
     textexit();
     question_shop = int(input("\n:::"));
@@ -243,6 +244,56 @@ def shop(): #Функция Магазин.
             myheal = myheal + 120;
             clear();
             shop();
+    elif (question_shop == 6):#20
+        if(money < 20):
+            print("У вас недостаточно Монет")
+            time.sleep(3);
+            menu();
+        else:
+            money = money - 25;
+            mystamina = mystamina + 10;
+            clear();
+            shop();
+    elif(question_shop == 7):
+        if(money < 40):
+            print("У вас недостаточно Монет")
+            time.sleep(3);
+            menu();
+        else:
+            money = money - 40;
+            mystamina = mystamina + 25;
+            clear();
+            shop();
+    elif(question_shop == 8):#60
+        if(money < 40):
+            print("У вас недостаточно Монет")
+            time.sleep(3);
+            menu();
+        else:
+            money = money - 50;
+            mystamina = mystamina + 35;
+            clear();
+            shop();
+    elif(question_shop == 9):#80
+        if(money < 40):
+            print("У вас недостаточно Монет")
+            time.sleep(3);
+            menu();
+        else:
+            money = money - 55;
+            mystamina = mystamina + 40;
+            clear();
+            shop();
+    elif(question_shop == 10):#120
+        if(money < 40):
+            print("У вас недостаточно Монет")
+            time.sleep(3);
+            menu();
+        else:
+            money = money - 80;
+            mystamina = mystamina + 60;
+            clear();
+            shop();
     elif (question_shop == 0):#
         menu();
 
@@ -264,7 +315,7 @@ def cave(): #Функция пещеры
             shop();
         else:
             b = 0;
-            a = random.randint(20, 60);
+            a = random.randint(5, 20);
             while a > b:
                 print("\t\tДо прихода в пещеру осталось", a , "Сек.");
                 time.sleep(1);
@@ -276,13 +327,13 @@ def cave(): #Функция пещеры
             time.sleep(3);
             if (a == 0):
                 c = 0
-                d = random.randint(20, 70);
-                while c < d:
+                d = random.randint(10, 30)
+                while (c < d):
                     print("\t\tПерсонаж бьёт киркой изо всех сил, Пожалуйста ожидайте", d , "Сек.");
                     time.sleep(1);
                     clear();
                     d = d - 1;
-            result = random.randint(0,1);
+            result = random.randint(1,2);
             if (result == 1):
                 if (metall_name == "литий"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
@@ -340,7 +391,7 @@ def cave(): #Функция пещеры
                     molibden += molibden_kg;
                     time.sleep(3);
                     invent();
-            elif (result == 0):
+            elif (result == 2):
                 print("\t\t%sНеудача!\n\t\tВаш персонаж ничего не собрал%s" % (fg("red"), attr(0)));
                 time.sleep(3);
                 invent();
@@ -532,4 +583,4 @@ def menu(): #Функция Меню.
         time.sleep(5);
         menu();
 
-menu();
+checkin();
