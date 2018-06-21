@@ -9,10 +9,7 @@ import time
 from colored import bg, fg, attr
 import dict
 
-clear = lambda: os.system("clear"); #Функция для очистки консоли.
-textexit = lambda: print("\n\n\t\t\t\tЧтобы выйти нажмите [0]"); #Функция текста выхода.
-
-            #Переменные
+            #Переменные персонажа.
 gm = False #Режим бога по умолчанию выключен.
 level = 1 #Уровень персонажа.
 myheal = 500 #Жизнь персонажа.
@@ -20,7 +17,7 @@ mystamina = 150 #Мана персонажа.
 money = 150 #Деньги персонажа.
 name_person = "notfing" #Имя персонажа, если человек пропустил регистрацию.
 war = 0 #Кол-во сражений по умолчанию.
-
+            #Переменные для различных металлов по умолчанию.
 litii = 0 #Переменная для кол-во лития по умолчанию.
 berilii = 0 #Кол-во бериллия.
 galii = 0 #Кол-во галлия.
@@ -29,6 +26,9 @@ germanii = 0 #Кол-во германия.
 vanadii = 0 #Кол-во ванадия.
 titan = 0 #Кол-во титана.
 molibden = 0 #Кол-во молибдена.
+
+clear = lambda: os.system("clear"); #Функция для очистки консоли.
+textexit = lambda: print("\n\n\t\t\t\tЧтобы выйти нажмите [0]"); #Функция текста выхода.
 
 def death(): #Функция смерти персонажа.
     global level;
@@ -39,6 +39,7 @@ def death(): #Функция смерти персонажа.
     global war;
     death = random.randint(0, 1);
     if (death == 0 or death == 1 and money <= 0):
+        time.sleep(2);
         clear();
         print("%s\t\t\tИгра закончена! Ваш персонаж мёртв.%s" % (fg("red"),attr(0)));
         time.sleep(5);
@@ -101,17 +102,19 @@ def hud(): #Функция показателей персонажа.
         print("\t‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
 
 def faq(): #Функция информации об игре.
+    clear();
+    hud();
     print('Добро пожаловать в игру под названием "Way Of Peasant"');
     print("Здесь вы можете узнать основы и игры  её тонкости ");
     print("Арена - Используется как добыча денег и поднятия вашего уровня");
     print("Магазин - в магазине вы можете купить зелье здоровья или маны");
     print("Пещера - ещё один вид заработка в игре.\nТут вам предстоит спуститься в пещеру и добывать металл позже продать его в магазине");
     print("Статистика - это место где вы можете узнать информацию о своём персонаже");
-    print("Так же ваш персонаж может умереть если его здоровье будет равно нулю !!!НЕ ДОПУСКАЙТЕ ЭТОГО!!!\nПосле того как он умрёт у вас всё обнулитсяи и игра начнётся заного");
+    print("Так же ваш персонаж может умереть если его здоровье будет равно нулю !!!НЕ ДОПУСКАЙТЕ ЭТОГО!!!\nПосле того как он умрёт у вас всё обнулится и игра начнётся заного");
     print("В пещере вы можете собрать ничего если ваш персонаж плохо потрудится ");
     print("Если у вас будет мало здоровья то вы не сможете попасть на арену");
     print("Игра будет дорабатываться и обновляться...");
-    print("Следите за новостями тут ------>https://vk.com/wayofpeasant<------");
+    print("Следите за новостями тут ------> vk.com/wayofpeasant <------");
     print("Разработчики: NULLHUMAN, x32006613756, Александр, PINKUNICORN");
     textexit();
     question_faq = int(input("::"));
@@ -124,14 +127,18 @@ def settings(): #Функция Настроек.
     clear();
     global name_person;
     print ("[1]Сменить имя");
-    vod = int(input("::"));
-    if(vod == 1):
+    textexit();
+    question_settings = int(input("::"));
+    if(question_settings == 1):
+        clear();
         print("Введите новое имя :");
-        name_person = input("::")
+        name_person = input("::");
         print("Ваше новое имя выглядит вот так :", name_person);
-        time.sleep(3);
+        time.sleep(2);
         menu();
-    elif(vod == 7777):
+    elif(question_settings == 0):
+        menu();
+    elif(question_settings == 7777):
         global myheal;
         global money;
         global mystamina;
@@ -139,10 +146,11 @@ def settings(): #Функция Настроек.
         myheal = myheal + 7777;
         mystamina = mystamina + 7777;
         print("GodMode: ON")
-        time.sleep(3);
+        time.sleep(2);
         menu();
     else:
         print("Вы ввели что-то не то");
+    textexit();
 
 def stat(): #Функция статистики персонажа.
     global level;
@@ -151,7 +159,20 @@ def stat(): #Функция статистики персонажа.
     global mystamina;
     global money;
     global name_person;
+    rank = ("Новичёк","Боец","Освоившийся","Убийца","Ветеран",)
     clear();
+    if(level == 1):
+        rank = "Новичёк"
+    elif(level == 2 or level == 3):
+        rank = "Боец"
+    elif(level == 4 or level == 5):
+        rank = "Освоившийся"
+    elif(level == 6 or level == 7):
+        rank = "Убийца"
+    elif(level == 8 or level == 9):
+        rank = "Ветеран"
+    else:
+        rank = NONE;
     print("%sИнформация о вас: %s" % (fg("yellow"), attr(0)));
     print("\t\t\t________________________________________")
     print("\t\t\t|Вы:", str(name_person));
@@ -160,6 +181,7 @@ def stat(): #Функция статистики персонажа.
     print("\t\t\t|У вас:", int(money) , "монет");
     print("\t\t\t|Ваш уровень:", int(level));
     print("\t\t\t|Вы провели", int(war), "сражений.");
+    print("\t\t\t|Ваше звание :",str(rank))
     print("\t\t\t‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾")
     textexit();
     question_stat = int(input("::"));
@@ -180,7 +202,8 @@ def invent(): #Инвентарь.
 
     clear();
     hud();
-    print("У вас", litii , "Кг лития.");
+    print("%s\t\tВаш инвентарь:%s" % (fg("yellow"), attr(0)));
+    print("\nУ вас", litii , "Кг лития.");
     print("У вас", berilii , "Кг бериллия.");
     print("У вас", galii, "Кг галлия");
     print("У вас", indii, "Кг индия");
@@ -195,7 +218,119 @@ def invent(): #Инвентарь.
     else:
         print("Вы ввели что-то не то");
 
-def shop(): #Функция Магазин.
+def trade(): #Функция торговли металлом.
+    global litii
+    global berilii
+    global galii
+    global indii
+    global germanii
+    global vanadii
+    global titan
+    global molibden
+    global money
+
+    clear();
+    hud();
+    print("%s\t\tЦены реального времени на:%s" % (fg("green"), attr(0)));
+    litii_coin = random.randint(100, 150);
+    print("\n[1]На 1 кг лития", litii_coin, "Монет.");
+    berilii_coin = random.randint(100, 150);
+    print("[2]На 1 кг бериллия", berilii_coin, "Монет.");
+    galii_coin = random.randint(100, 150);
+    print("[3]На 1 кг галлия ", galii_coin, "Монет.");
+    indii_coin = random.randint(100, 150);
+    print("[4]На 1 кг индия ", indii_coin, "Монет.");
+    germanii_coin = random.randint(100, 150);
+    print("[5]На 1 кг германия ", germanii_coin, "Монет.");
+    vanadii_coin = random.randint(100, 150);
+    print("[6]На 1 кг ванадия ", vanadii_coin, "Монет.");
+    titan_coin = random.randint(100, 150);
+    print("[7]На 1 кг титана ", titan_coin, "Монет.");
+    molibden_coin = random.randint(100, 150);
+    print("[8]На 1 кг молибдена ", molibden_coin, "Монет.");
+
+    textexit();
+    question_trade = int(input("::"));
+    if (question_trade == 0):
+        menu();
+    elif (question_trade == 1):
+        if (litii <= 0):
+            print("У вас нету лития.");
+            time.sleep(1);
+            menu();
+        else:
+            litii = litii - 1;
+            money = litii_coin + money;
+            trade();
+    elif (question_trade == 2):
+        if (berilii <= 0):
+            print("У вас нету бериллия.");
+            time.sleep(1);
+            menu();
+        else:
+            berilii = berilii -1;
+            money = berilii_coin + money;
+            trade();
+    elif (question_trade == 3):
+        if (galii <= 0):
+            print("У вас нету галия.");
+            time.sleep(1);
+            menu();
+        else:
+            galii = galii - 1;
+            money = galii_coin + money;
+            trade();
+    elif (question_trade == 4):
+        if (indii <= 0):
+            print("У вас нету индия.");
+            time.sleep(1);
+            menu();
+        else:
+            indii = indii - 1;
+            money = indii_coin + money;
+            trade();
+    elif (question_trade == 5):
+        if (germanii <= 0):
+            print("У вас нету германия.");
+            time.sleep(1);
+            menu();
+        else:
+            germanii = germanii - 1;
+            money = germanii_coin + money;
+            trade();
+    elif (question_trade == 6):
+        if (vanadii <= 0):
+            print("У вас нету ванадия.");
+            time.sleep(1);
+            menu();
+        else:
+            vanadii = vanadii - 1;
+            money = vanadii_coin + money;
+            trade();
+    elif (question_trade == 7):
+        if (titan <= 0):
+            print("У вас нету титана.");
+            time.sleep(1);
+            menu();
+        else:
+            titan = titan - 1;
+            money = titan_coin + money;
+            trade();
+    elif (question_trade == 8):
+        if (molibden <= 0):
+            print("У вас нету молибдена.");
+            time.sleep(1);
+            menu();
+        else:
+            molibden = molibden - 1;
+            money = molibden_coin + money;
+            trade();
+    else:
+        print("Вы ввели что-то не то");
+        time.sleep(1);
+        trade();
+
+def shop():#Функция магазина.
     global myheal;
     global mystamina;
     global money;
@@ -216,7 +351,7 @@ def shop(): #Функция Магазин.
     if (question_shop == 1):#20
         if(money < 20):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 40;
@@ -226,7 +361,7 @@ def shop(): #Функция Магазин.
     elif(question_shop == 2):
         if(money < 40):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 40;
@@ -236,7 +371,7 @@ def shop(): #Функция Магазин.
     elif(question_shop == 3):#60
         if(money < 40):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 60;
@@ -246,7 +381,7 @@ def shop(): #Функция Магазин.
     elif(question_shop == 4):#80
         if(money < 40):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 80;
@@ -256,7 +391,7 @@ def shop(): #Функция Магазин.
     elif(question_shop == 5):#120
         if(money < 40):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 120;
@@ -266,7 +401,7 @@ def shop(): #Функция Магазин.
     elif (question_shop == 6):#20
         if(money < 20):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 25;
@@ -276,7 +411,7 @@ def shop(): #Функция Магазин.
     elif(question_shop == 7):
         if(money < 40):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 40;
@@ -286,7 +421,7 @@ def shop(): #Функция Магазин.
     elif(question_shop == 8):#60
         if(money < 40):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 50;
@@ -296,7 +431,7 @@ def shop(): #Функция Магазин.
     elif(question_shop == 9):#80
         if(money < 40):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 55;
@@ -306,7 +441,7 @@ def shop(): #Функция Магазин.
     elif(question_shop == 10):#120
         if(money < 40):
             print("У вас недостаточно Монет")
-            time.sleep(3);
+            time.sleep(1);
             menu();
         else:
             money = money - 80;
@@ -316,7 +451,7 @@ def shop(): #Функция Магазин.
     elif (question_shop == 0):#
         menu();
 
-def cave(): #Функция пещеры
+def cave(): #Функция пещеры.
     global litii
     global berilii
     global galii
@@ -326,7 +461,8 @@ def cave(): #Функция пещеры
     global titan
     global molibden
     clear();
-    print("Спуститься в пещеру? [1]Да [2]Нет");
+    print("%sПещера - служит для  добычи разнличных металлов.%s" % (fg("red"),attr(0)));
+    print("Спуститься в пещеру? [1]Да [0]Нет");
     print("%sПРЕДУПРЕЖДЕНИЕ: выйти из пещеры можно будет только по истечению времени!%s" % (fg("red"), attr(0)));
     question_cave = int(input("::"));
     if (question_cave == 1):
@@ -343,7 +479,7 @@ def cave(): #Функция пещеры
             print("%s\t\tВаш персонаж прибыл в пещеру!%s" % (fg("yellow"), attr(0)));
             metall_name = random.choice(dict.metall);
             print("\t\tВаш персонаж начал добычу редкого металла" , metall_name);
-            time.sleep(3);
+            time.sleep(2);
             if (a == 0):
                 c = 0
                 d = random.randint(10, 30)
@@ -359,62 +495,62 @@ def cave(): #Функция пещеры
                     litii_kg = random.randint(1, 30);
                     print("\t\tВы собрали", litii_kg , "Кг металла", metall_name);
                     litii += litii_kg;
-                    time.sleep(3);
+                    time.sleep(2);
                     invent();
                 elif(metall_name == "бериллий"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
                     berilii_kg = random.randint(1, 30);
                     print("\t\tВы собрали", berilii_kg , "Кг металла", metall_name);
                     berilii += berilii_kg;
-                    time.sleep(3);
+                    time.sleep(2);
                     invent();
                 elif(metall_name == "галиий"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
                     galii_kg = random.randint(1, 30);
                     print("\t\tВы собрали", galii_kg , "Кг металла", metall_name);
                     galii += galii_kg;
-                    time.sleep(3);
+                    time.sleep(2);
                     invent();
                 elif(metall_name == "индий"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
                     indii_kg = random.randint(1, 30);
                     print("\t\tВы собрали", indii_kg , "Кг металла", metall_name);
                     indii += indii_kg;
-                    time.sleep(3);
+                    time.sleep(2);
                     invent();
                 elif(metall_name == "германий"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
                     germanii_kg = random.randint(1, 30);
                     print("\t\tВы собрали", germanii_kg , "Кг металла", metall_name);
                     germanii += germanii_kg;
-                    time.sleep(3);
+                    time.sleep(2);
                     invent();
                 elif(metall_name == "ванадий"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
                     vanadii_kg = random.randint(1, 30);
                     print("\t\tВы собрали", vanadii_kg , "Кг металла", metall_name);
                     vanadii += vanadii_kg;
-                    time.sleep(3);
+                    time.sleep(2);
                     invent();
                 elif(metall_name == "титан"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
                     titan_kg = random.randint(1, 30);
                     print("\t\tВы собрали", titan , "Кг металла", metall_name);
                     titan += titan_kg;
-                    time.sleep(3);
+                    time.sleep(2);
                     invent();
                 elif(metall_name == "молибден"):
                     print("\t\t%sУспех!%s" % (fg("green"), attr(0)));
                     molibden_kg = random.randint(2, 30);
                     print("\t\tВы собрали", molibden_kg , "Кг металла", metall_name);
                     molibden += molibden_kg;
-                    time.sleep(3);
+                    time.sleep(2);
                     invent();
             elif (result == 2):
                 print("\t\t%sНеудача!\n\t\tВаш персонаж ничего не собрал%s" % (fg("red"), attr(0)));
-                time.sleep(3);
+                time.sleep(2);
                 invent();
-    elif (question_cave == 2):
+    elif (question_cave == 0):
         menu();
     else:
         print("Вы ввели что-то не то.");
@@ -435,7 +571,15 @@ def arena(): #Функция Арены.
         level = level + 1;
     elif (war == 20):
         level = level + 1;
-    elif (war >= 50):
+    elif (war >= 25):
+        level = level + 1;
+    elif (war == 30):
+        level = level + 1;
+    elif (war == 35):
+        level = level + 1;
+    elif (war == 40):
+        level = level + 1;
+    elif (war >= 45):
         level = level + 1;
 
     while True:
@@ -468,7 +612,7 @@ def arena(): #Функция Арены.
                         death();
                     else:
                         print("\t\tВам нанесли",bdmg ,"урона.","Ваше HP: ", myheal);
-                    if(mydmg >= bheal and myheal >=50):
+                    if(mydmg >= bheal and myheal >=50 and bheal <=100):
                         money = money + present;
                         print("%s\t\tПобеда!%s" % (fg("green"), attr(0)));
                         print("\t\tПоздравляю вы победили!!! Ваша награда :",present);
@@ -502,14 +646,14 @@ def arena(): #Функция Арены.
                         death();
                     if(myheal <=50):
                         print("\t\tВам плохо выпейте лекарство");
-                        time.sleep(3);
+                        time.sleep(2);
                         menu();
                     else:
                         arena();
                 elif (q_two_arena == 2):
                     if(mystamina < 50):
                         print("У вас мало сил чтобы использовать суперудар!\nПосетите магазин и купите зелье");
-                        time.sleep(3);
+                        time.sleep(2);
                         arena();
                     else:
                         mystamina = mystamina - 50;
@@ -555,7 +699,7 @@ def arena(): #Функция Арены.
                         death();
                     if(myheal <=50):
                         print("\t\tВам плохо выпейте лекарство");
-                        time.sleep(3);
+                        time.sleep(2);
                         menu();
                     else:
                         arena();
@@ -563,6 +707,8 @@ def arena(): #Функция Арены.
             menu();
         else:
             print("Вы ввели что-то не то.");
+            time.sleep(1);
+            menu();
     arena();
 
 def menu(): #Функция Меню.
@@ -570,36 +716,42 @@ def menu(): #Функция Меню.
     global myheal;
     global mystamina;
     global money;
-    print("%s\n\n[1]Арена%s" % (fg("red"), attr(0)));
-    print("%s[2]Пещера%s" % (fg("red"), attr(0)));
-    print("%s[3]Магазин%s" % (fg("green"), attr(0)));
-    print("%s[4]Инвентарь%s" % (fg("green"), attr(0)));
-    print("%s[5]Статистика%s" % (fg("yellow"), attr(0)));
-    print("%s[6]Настройки%s" % (fg("yellow"), attr(0)));
-    print("[7]Выход");
+    print("%s%s\n\n[1]Арена%s" % (fg("red"),bg("grey_11"), attr(0)));
+    print("%s%s[2]Пещера%s" % (fg("red"),bg("grey_11"),attr(0)));
+    print("%s%s[3]Магазин%s" % (fg("green"),bg("grey_11"), attr(0)));
+    print("%s%s[4]Торговая лавка%s" % (fg("green"),bg("grey_11"), attr(0)));
+    print("%s%s[5]Инвентарь%s" % (fg("yellow"),bg("grey_11"), attr(0)));
+    print("%s%s[6]Статистика%s" % (fg("yellow"),bg("grey_11"), attr(0)));
+    print("%s%s[7]F.A.Q%s" % (fg("orange_4b"),bg("grey_11"), attr(0)));
+    print("%s%s[8]Настройки%s" % (fg("orange_4b"),bg("grey_11"), attr(0)));
+    print("[9]Выход");
     try:
-      vod = int(input("\n::")) #Запрос ответа от игрока.
-      if(vod == 1):
+      question_menu = int(input("\n::")) #Запрос ответа от игрока.
+      if(question_menu == 1):
           arena();
-      elif(vod == 2):
+      elif(question_menu == 2):
           cave();
-      elif(vod == 3):
+      elif(question_menu == 3):
           shop();
-      elif(vod == 4):
+      elif(question_menu == 4):
+          trade();
+      elif(question_menu == 5):
           invent();
-      elif(vod == 5):
+      elif(question_menu == 6):
           stat();
-      elif(vod == 6):
+      elif(question_menu == 7):
+          faq();
+      elif(question_menu == 8):
           settings();
-      elif (vod == 7):
+      elif (question_menu == 9):
           os.system("exit");
       else:
           print("Такого выбора нету");
-          time.sleep(3);
+          time.sleep(1);
           menu();
     except ValueError:
         print("Вы ввели что-то не то.");
-        time.sleep(5);
+        time.sleep(1);
         menu();
 
 checkin();
