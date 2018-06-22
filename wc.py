@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 КРЕСТЬЯНИН
 РАЗРАБОТКИЧИКИ: NULLHUMAN, X23006613159, Александр, PINKUNICORN.
@@ -230,7 +231,7 @@ def trade(): #Функция торговли металлом.
 
     clear();
     hud();
-    print("%s\t\tЦены реального времени на:%s" % (fg("green"), attr(0)));
+    print("%s\t\tЦены реального времени:%s" % (fg("green"), attr(0)));
     litii_coin = random.randint(100, 150);
     print("\n[1]На 1 кг лития", litii_coin, "Монет.");
     berilii_coin = random.randint(100, 150);
