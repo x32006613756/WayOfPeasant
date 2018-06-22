@@ -99,7 +99,6 @@ def hud(): #Функция показателей персонажа.
         print("%sСледуйте на арену, т.к у вас совсем нету монет.%s" % (fg("red"),attr(0)));
     else:
         print("\t|","Вы",str(name_person), "|", "Ваше ХП:",int(myheal), "|", "Ваша Мана:",int(mystamina), "|", "Деньги :" ,int(money), "|" , "Ваш уровень:", int(level),"|");
-        print("\t‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾");
 
 def faq(): #Функция информации об игре.
     clear();
@@ -131,9 +130,9 @@ def settings(): #Функция Настроек.
     question_settings = int(input("::"));
     if(question_settings == 1):
         clear();
-        print("Введите новое имя :");
+        print("Введите новое имя:");
         name_person = input("::");
-        print("Ваше новое имя выглядит вот так :", name_person);
+        print("Ваше новое имя выглядит вот так:", name_person);
         time.sleep(2);
         menu();
     elif(question_settings == 0):
@@ -149,7 +148,7 @@ def settings(): #Функция Настроек.
         time.sleep(2);
         menu();
     else:
-        print("Вы ввели что-то не то");
+        print("Вы ввели что-то не то.");
     textexit();
 
 def stat(): #Функция статистики персонажа.
@@ -205,18 +204,18 @@ def invent(): #Инвентарь.
     print("%s\t\tВаш инвентарь:%s" % (fg("yellow"), attr(0)));
     print("\nУ вас", litii , "Кг лития.");
     print("У вас", berilii , "Кг бериллия.");
-    print("У вас", galii, "Кг галлия");
-    print("У вас", indii, "Кг индия");
-    print("У вас", germanii, "Кг германия");
-    print("У вас", vanadii, "Кг ванадия");
-    print("У вас", titan, "Кг титана");
-    print("У вас", molibden, "Кг молибдена");
+    print("У вас", galii, "Кг галлия.");
+    print("У вас", indii, "Кг индия.");
+    print("У вас", germanii, "Кг германия.");
+    print("У вас", vanadii, "Кг ванадия.");
+    print("У вас", titan, "Кг титана.");
+    print("У вас", molibden, "Кг молибдена.");
     textexit();
     question_invent = int(input("::"))
     if (question_invent == 0):
         menu();
     else:
-        print("Вы ввели что-то не то");
+        print("Вы ввели что-то не то.");
 
 def trade(): #Функция торговли металлом.
     global litii
@@ -326,7 +325,7 @@ def trade(): #Функция торговли металлом.
             money = molibden_coin + money;
             trade();
     else:
-        print("Вы ввели что-то не то");
+        print("Вы ввели что-то не то.");
         time.sleep(1);
         trade();
 
@@ -350,7 +349,7 @@ def shop():#Функция магазина.
 
     if (question_shop == 1):#20
         if(money < 20):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -360,7 +359,7 @@ def shop():#Функция магазина.
             shop();
     elif(question_shop == 2):
         if(money < 40):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -370,7 +369,7 @@ def shop():#Функция магазина.
             shop();
     elif(question_shop == 3):#60
         if(money < 40):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -380,7 +379,7 @@ def shop():#Функция магазина.
             shop();
     elif(question_shop == 4):#80
         if(money < 40):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -390,7 +389,7 @@ def shop():#Функция магазина.
             shop();
     elif(question_shop == 5):#120
         if(money < 40):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -400,7 +399,7 @@ def shop():#Функция магазина.
             shop();
     elif (question_shop == 6):#20
         if(money < 20):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -410,7 +409,7 @@ def shop():#Функция магазина.
             shop();
     elif(question_shop == 7):
         if(money < 40):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -420,7 +419,7 @@ def shop():#Функция магазина.
             shop();
     elif(question_shop == 8):#60
         if(money < 40):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -430,7 +429,7 @@ def shop():#Функция магазина.
             shop();
     elif(question_shop == 9):#80
         if(money < 40):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -440,7 +439,7 @@ def shop():#Функция магазина.
             shop();
     elif(question_shop == 10):#120
         if(money < 40):
-            print("У вас недостаточно Монет")
+            print("У вас недостаточно Монет.")
             time.sleep(1);
             menu();
         else:
@@ -478,7 +477,7 @@ def cave(): #Функция пещеры.
                 a = a - 1;
             print("%s\t\tВаш персонаж прибыл в пещеру!%s" % (fg("yellow"), attr(0)));
             metall_name = random.choice(dict.metall);
-            print("\t\tВаш персонаж начал добычу редкого металла" , metall_name);
+            print("\t\tВаш персонаж начал добычу редкого металла." , metall_name);
             time.sleep(2);
             if (a == 0):
                 c = 0
@@ -547,7 +546,7 @@ def cave(): #Функция пещеры.
                     time.sleep(2);
                     invent();
             elif (result == 2):
-                print("\t\t%sНеудача!\n\t\tВаш персонаж ничего не собрал%s" % (fg("red"), attr(0)));
+                print("\t\t%sНеудача!\n\t\tВаш персонаж ничего не собрал.%s" % (fg("red"), attr(0)));
                 time.sleep(2);
                 invent();
     elif (question_cave == 0):
@@ -605,7 +604,7 @@ def arena(): #Функция Арены.
                     if (bheal <= 0):
                         print("\t\tВы нанесли", mydmg, "Противник,мёртв!");
                     else:
-                        print("\t\tВы нанесли", mydmg, "урона.","У противника HP :", bheal);
+                        print("\t\tВы нанесли", mydmg, "урона.","У противника HP:", bheal);
                     myheal = myheal - bdmg;
                     if  (myheal <= 0):
                         print("%s\t\tПРЕДУПРЕЖДЕНИЕ: Противник нанёс вам критический удар.%s" % (fg("red"), attr(0)));
@@ -615,24 +614,24 @@ def arena(): #Функция Арены.
                     if(mydmg >= bheal and myheal >=50 and bheal <=100):
                         money = money + present;
                         print("%s\t\tПобеда!%s" % (fg("green"), attr(0)));
-                        print("\t\tПоздравляю вы победили!!! Ваша награда :",present);
+                        print("\t\tПоздравляю вы победили!!! Ваша награда:",present);
                         time.sleep(4);
                     elif(mydmg >= bheal and myheal <=50):
                         money = money + (present/2);
                         print("%s\t\tНичья!%s" % (fg("yellow"), attr(0)));
-                        print("\t\tВаш противник побеждён но вы тоже повреждены.Вы поделили награду :",present);
+                        print("\t\tВаш противник побеждён но вы тоже повреждены.Вы поделили награду:",present);
                         time.sleep(4);
                     elif(myheal > bdmg and mydmg < bheal):
                         money = money + (present/2);
                         print("%s\t\tНичья!%s" % (fg("yellow"), attr(0)));
                         print("\t\tВы не одалели противника,но он оставил вас в живых.");
-                        print("\t\tНаграду он поделил с вами : ", present);
+                        print("\t\tНаграду он поделил с вами: ", present);
                         time.sleep(4);
                     elif(mydmg < bheal and bheal <=50 and myheal <=50):
                         money = money + (present/2);
                         print("%s\t\tНичья!%s" % (fg("yellow"), attr(0)));
                         print("\t\tВы не одалели противника,но он оставил вас в живых.");
-                        print("\t\tНаграду он поделил с вами : ", present);
+                        print("\t\tНаграду он поделил с вами: ", present);
                         time.sleep(4);
                     elif(bdmg >= myheal and mydmg >= bheal):
                         money = money + (present/2);
@@ -645,14 +644,14 @@ def arena(): #Функция Арены.
                         time.sleep(4);
                         death();
                     if(myheal <=50):
-                        print("\t\tВам плохо выпейте лекарство");
+                        print("\t\tВам плохо выпейте лекарство.");
                         time.sleep(2);
                         menu();
                     else:
                         arena();
                 elif (q_two_arena == 2):
                     if(mystamina < 50):
-                        print("У вас мало сил чтобы использовать суперудар!\nПосетите магазин и купите зелье");
+                        print("У вас мало сил чтобы использовать суперудар!\nПосетите магазин и купите зелье.");
                         time.sleep(2);
                         arena();
                     else:
@@ -661,7 +660,7 @@ def arena(): #Функция Арены.
                     if (bheal <= 0):
                         print("\t\tВы нанесли", mysuperdmg, "Противник,мёртв!");
                     else:
-                        print("\t\tВы нанесли", mysuperdmg, "урона.","У противника HP :", bheal);
+                        print("\t\tВы нанесли", mysuperdmg, "урона.","У противника HP:", bheal);
                     myheal = myheal - bdmg;
                     if  (myheal <= 0):
                         print("%s\t\tПРЕДУПРЕЖДЕНИЕ: Противник нанёс вам критический удар.%s" % (fg("red"), attr(0)));
@@ -671,12 +670,12 @@ def arena(): #Функция Арены.
                     if(mysuperdmg >= bheal and myheal >=50):
                         money = money + present;
                         print("%s\t\tПобеда!%s" % (fg("green"), attr(0)));
-                        print("\t\tПоздравляю вы победили!!! Ваша награда :",present);
+                        print("\t\tПоздравляю вы победили!!! Ваша награда:",present);
                         time.sleep(4);
                     elif(mysuperdmg >= bheal and myheal <=50):
                         money = money + (present/2);
                         print("%s\t\tНичья!%s" % (fg("yellow"), attr(0)));
-                        print("\t\tВаш противник побеждён но вы тоже повреждены.Вы поделили награду :",present);
+                        print("\t\tВаш противник побеждён но вы тоже повреждены.Вы поделили награду:",present);
                         time.sleep(4);
                     elif(myheal > bdmg and mysuperdmg < bheal):
                         money = money + (present/2);
@@ -685,7 +684,7 @@ def arena(): #Функция Арены.
                     elif(mysuperdmg < bheal and bheal <=50 and myheal <=50):
                         money = money + (present/2);
                         print("%s\t\tНичья!%s" % (fg("yellow"), attr(0)));
-                        print("\t\tВы не одалели противника,но он оставил вас в живых. Награду он поделил с вами : ", present);
+                        print("\t\tВы не одалели противника,но он оставил вас в живых. Награду он поделил с вами: ", present);
                         time.sleep(4);
                     elif(bdmg >= myheal and mysuperdmg >= bheal):
                         money = money + (present/2);
@@ -698,7 +697,7 @@ def arena(): #Функция Арены.
                         time.sleep(4);
                         death();
                     if(myheal <=50):
-                        print("\t\tВам плохо выпейте лекарство");
+                        print("\t\tВам плохо выпейте лекарство.");
                         time.sleep(2);
                         menu();
                     else:
@@ -716,14 +715,14 @@ def menu(): #Функция Меню.
     global myheal;
     global mystamina;
     global money;
-    print("%s%s\n\n[1]Арена%s" % (fg("red"),bg("grey_11"), attr(0)));
-    print("%s%s[2]Пещера%s" % (fg("red"),bg("grey_11"),attr(0)));
-    print("%s%s[3]Магазин%s" % (fg("green"),bg("grey_11"), attr(0)));
-    print("%s%s[4]Торговая лавка%s" % (fg("green"),bg("grey_11"), attr(0)));
-    print("%s%s[5]Инвентарь%s" % (fg("yellow"),bg("grey_11"), attr(0)));
-    print("%s%s[6]Статистика%s" % (fg("yellow"),bg("grey_11"), attr(0)));
-    print("%s%s[7]F.A.Q%s" % (fg("orange_4b"),bg("grey_11"), attr(0)));
-    print("%s%s[8]Настройки%s" % (fg("orange_4b"),bg("grey_11"), attr(0)));
+    print("%s\n\n[1]Арена%s" % (fg("red"), attr(0)));
+    print("%s[2]Пещера%s" % (fg("red"), attr(0)));
+    print("%s[3]Магазин%s" % (fg("green"), attr(0)));
+    print("%s[4]Торговая лавка%s" % (fg("green"), attr(0)));
+    print("%s[5]Инвентарь%s" % (fg("yellow"), attr(0)));
+    print("%s[6]Статистика%s" % (fg("yellow"), attr(0)));
+    print("%s[7]F.A.Q%s" % (fg("orange_4b"), attr(0)));
+    print("%s[8]Настройки%s" % (fg("orange_4b"), attr(0)));
     print("[9]Выход");
     try:
       question_menu = int(input("\n::")) #Запрос ответа от игрока.
