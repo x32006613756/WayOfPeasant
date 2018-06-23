@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
+
+#Версия для Линукс.
+
 """
 КРЕСТЬЯНИН
 РАЗРАБОТКИЧИКИ: NULLHUMAN, X23006613159, Александр, PINKUNICORN.
 Дата: 11.06.2018.
 """
+
 import os
 import random
 import time
@@ -28,7 +32,7 @@ vanadii = 0 #Кол-во ванадия.
 titan = 0 #Кол-во титана.
 molibden = 0 #Кол-во молибдена.
 
-clear = lambda: os.system("clear"); #Функция для очистки консоли.
+clear = lambda: os.system("clear") #Функция для очистки консоли.
 textexit = lambda: print("\n\n\t\t\t\tЧтобы выйти нажмите [0]"); #Функция текста выхода.
 
 def death(): #Функция смерти персонажа.
@@ -57,19 +61,18 @@ def death(): #Функция смерти персонажа.
         vanadii = 0
         titan = 0
         molibden = 0
-        checkin();
+        logo();
     elif (death == 1):
         clear();
         print("\t\tВам крупно повезло! Ваш персонаж выжил, впредь будте крайне аккуратны.");
-        time.sleep(5);
+        time.sleep(3);
         shop();
 
-def checkin(): #Функция регистрации.
-    global name_person;
+def logo(): #Функция лого.
     clear();
-    print("\t\t\t\tДобро пожаловать в игру.")
+    print("\t\t\t\tДобро пожаловать в игру.");
     time.sleep(2);
-    print("\t\tЛюбые совпадения с историческими событиями чистейшая случайность.")
+    print("\t\tЛюбые совпадения с историческими событиями чистейшая случайность.");
     time.sleep(2);
     print("""%s
      |  /   |--|  |----  |----  ---|---  |       |---|   |   |   |    /|   |   |
@@ -79,12 +82,21 @@ def checkin(): #Функция регистрации.
      |   \  |     |----  |----     |     |---|     / |   |   |   |/    |   |   |
     %s""" % (fg("red"), attr(0)));
     time.sleep(5);
+    checkin();
+
+def checkin(): #Функция регистрации.
+    global name_person
     clear();
     print("\t\t\t\tРегистрация аккаунта.");
     print("%sПожалуйста введите ваш ник: %s" % (fg("blue"), attr(0)));
     del name_person;
     name_person = input("::");
-    menu();
+    if (len(name_person) > 10):
+        print("Максимум 10 символов.");
+        time.sleep(1)
+        checkin();
+    else:
+        menu();
 
 def hud(): #Функция показателей персонажа.
     global gm;
@@ -133,9 +145,14 @@ def settings(): #Функция Настроек.
         clear();
         print("Введите новое имя:");
         name_person = input("::");
-        print("Ваше новое имя выглядит вот так:", name_person);
-        time.sleep(2);
-        menu();
+        if (len(name_person) > 10):
+            print("Имя должно иметь не больше 10 символов.");
+            time.sleep(1);
+            settings();
+        else:
+            print("Ваше новое имя выглядит вот так:", name_person);
+            time.sleep(2);
+            menu();
     elif(question_settings == 0):
         menu();
     elif(question_settings == 7777):
@@ -754,4 +771,4 @@ def menu(): #Функция Меню.
         time.sleep(1);
         menu();
 
-checkin();
+logo();

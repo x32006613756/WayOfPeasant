@@ -31,7 +31,7 @@ vanadii = 0 #Кол-во ванадия.
 titan = 0 #Кол-во титана.
 molibden = 0 #Кол-во молибдена.
 
-clear = lambda: os.system("clear"); #Функция для очистки консоли.
+clear = lambda: os.system("cls"); #Функция для очистки консоли.
 textexit = lambda: print("\n\n\t\t\t\tЧтобы выйти нажмите [0]"); #Функция текста выхода.
 
 def death(): #Функция смерти персонажа.
@@ -83,7 +83,7 @@ def logo(): #Функция лого при запуске.
     time.sleep(5);
     checkin();
 
-def checkin():
+def checkin(): #Функция регистрации.
     global name_person
     clear();
     print("\t\t\t\tРегистрация аккаунта.");
@@ -146,6 +146,8 @@ def settings(): #Функция Настроек.
         name_person = input("::");
         if (len(name_person) > 10):
             print("Имя должно иметь не больше 10 символов.");
+            time.sleep(1);
+            settings();
         else:
             print("Ваше новое имя выглядит вот так:", name_person);
             time.sleep(2);
